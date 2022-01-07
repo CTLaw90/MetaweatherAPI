@@ -3,7 +3,6 @@
 import requests
 import json
 import threading
-import math
 
 '''Added the ability to find weather data by searching the API by city name and getting the WOEID so you don't have to know beforehand'''
 locations = ['2487610', '2442047', '2366355', 'New York', 'Boston']
