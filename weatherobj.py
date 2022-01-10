@@ -25,8 +25,17 @@ class weatherOBJ:
     waits until all data has been received before moving on '''
     def __init__(self, loc):
         self.locations = {}
-        for j in loc:
-            self.locations[j] = self.getWeather(j)
+        
+        if type(loc) is str:
+            self.locations[loc] = self.getWeather(loc)
+        elif type(loc) is int:
+            self.locations[str(loc)] = self.getWeather(str(loc))
+        elif type(loc) is list:
+            for j in loc:
+                self.locations[j] = self.getWeather(j)
+        else:
+            print('Invalid arg passed. Can accept Str Int or List')
+            return()
 
         for k in self.locations.keys():
             self.locations[k] = self.locations[k].result()
@@ -76,7 +85,10 @@ class weatherOBJ:
     def getData(self, requestedData):
         if requestedData == 'getAvgMax':
             for loc in self.locations.keys():
-                self.getAvgMax(self.locations[loc])
+                if type(self.locations[loc]) is not type(None):
+                    self.getAvgMax(self.locations[loc])
+                else:
+                    print('Error with data for', loc)
         else:
             print('Invalid Funciton Requested...')
             return()
